@@ -1,0 +1,70 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+# Stage 1
+# Build Docker Image
+# Publish K8s files
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'm4ttl33t-docker-hub'
+        repository: 'm4ttl33t/currency-exchange-devops'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/*.yaml'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'manifests'
+        publishLocation: 'Container'
+
+# Stage 2
+# Download K8S Config files
+# Deploy to K8s cluster
+
+- stage: Deploy
+  displayName: Deploy image
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'manifests'
+        itemPattern: '**/*.yaml'
+        targetPath: '$(System.ArtifactsDirectory)'
+
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'deploy'
+        kubernetesServiceConnection: 'azure-kubernetes-connection'
+        namespace: 'default'
+        manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
+        containers: 'm4ttl33t/currency-exchange-devops:$(tag)'

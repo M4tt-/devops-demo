@@ -1,0 +1,24 @@
+---
+- hosts: all
+  tasks:
+    - name: Ping All Servers
+      action: ping
+    - debug: msg="Hello"
+- hosts: dev
+  tasks:
+    - debug: msg="Hello Dev"
+    - name: Execute a shell command
+      shell: uname
+      register: uname_result
+    - debug: msg="{{ uname_result.stdout }}"
+- hosts: qa
+  become: true
+  vars:
+    banner: "Welcome! This is my banner."
+  tasks:
+    - yum:
+        name:
+          - httpd
+        state: present
+    - service: name=httpd state=started enabled=yes
+    - raw: "echo {{banner}} | sudo tee /var/www/html/index.html"
