@@ -5,7 +5,7 @@ A repo for playing with the basics of DevOps and cloud providers (AWS, GCP, Azur
 Tech stack:
 
 - Docker
-- Kubernetes
+- Kubernetes (K8S)
 - Ansible
 - Terraform
 - Azure DevOps
@@ -15,16 +15,16 @@ Tech stack:
 
 ### Terraform (IAAC)
 
-`main.tf` declares an AWS infrastructure with the following resources:
+`terraform\main.tf` declares an AWS infrastructure with the following resources:
 
 - S3 bucket
 - EC2 instances (as HTTP servers)
 - Load Balancer
 - Security Groups
 
-`output.tf` is merely a file that outputs some details about the security group on the HTTP servers.
-`variables.tf` contains a variable for the AWS key pair used for AWS cloud authentication.
-`data-providers.tf` contains some AWS data sources that are referred to in `main.tf`.
+`terraform\output.tf` is merely a file that outputs some details about the security group on the HTTP servers.
+`terraform\variables.tf` contains a variable for the AWS key pair used for AWS cloud authentication.
+`terraform\data-providers.tf` contains some AWS data sources that are referred to in `main.tf`.
 
 Assuming one has an AWS account and basic configuration in place, one can get up and running with this infrastructure by carrying out
 the following commands:
@@ -42,7 +42,7 @@ by the next time it's read.
 
 ### Ansible (Server Provisioning)
 
-A playbook `playbook\demo.yml` exists to execute various commands on three different servers. One
+A playbook `ansible\playbook\demo.yml` exists to execute various commands on three different servers. One
 *group* of servers ('qa'), apache web server is installed with `yum`.
 
 The playbook can be executed by entering `ansible-playbook playbooks/demo.yml` at the commmand line.
