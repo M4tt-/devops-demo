@@ -1,6 +1,6 @@
 ## devops-demo
 
-A repo for playing with the basics of DevOps and cloud providers (AWS, GCP, Azure). There are CI/CD pipelines, cloud provisioning (IAAC), and other random fun stuff. I wrote a lot of this code while taking a DevOps course offered by in28min (link below under Author).
+A repo for playing with the basics of DevOps and cloud providers (AWS, GCP, Azure). There are CI/CD pipelines, cloud provisioning (IAAC), and other random fun stuff. Some of this code was written while taking a DevOps course offered by in28min (link below under Author) and further modified to be more general.
 
 Tech stack:
 
@@ -82,9 +82,17 @@ and the YAML format is cleaner than Jenkins Declarative Pipelines. No dig on Jen
 
 ### Jenkins
 
-There is a Jenkinsfile at the base of this repository that is 'standalone' - it doesn't operate on the other code
-herein, it is merely a demo file that takes advantage of triggers, sets environemtn variables, builds a CI pipeline,
-declares some functions, etc.
+There is a ``Jenkinsfile`` at the base of this repository that is 'standalone' - it doesn't actually operate on the other code
+herein, it is merely a demo file that showcases various things you can do:
+
+- Trigger on some web hook (e.g., pull request)
+- Checkout code
+- Test code
+- Lint code
+- Build + Push Docker image
+- Send an email with build status
+
+These steps are put into stages that can realize a CI pipeline.
 
 ## Author
 
