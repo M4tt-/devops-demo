@@ -18,6 +18,18 @@ stages:
     steps:
     - bash: echo "Do the build"
 
+- stage: Test
+  jobs:
+  - job: UnitTest
+    steps:
+    - bash: echo "Execute Unit Tests (pytest / junit / etc cmd)"
+
+- stage: Lint
+  jobs:
+  - job: LintJob
+    steps:
+    - bash: echo "Run linter"
+
 - stage: DevDeploy
   jobs:
   - deployment: DevDeployJob
