@@ -80,6 +80,12 @@ I personally have much more experience building CI pipelines with Jenkins. IMO, 
 environment for building CI pipelines. It is easier to find useful code snippets using Azure Pipelines search and select tool,
 and the YAML format is cleaner than Jenkins Declarative Pipelines. No dig on Jenkins (it's free, after all), I still love it!
 
+### Jenkins
+
+There is a Jenkinsfile at the base of this repository that is 'standalone' - it doesn't operate on the other code
+herein, it is merely a demo file that takes advantage of triggers, sets environemtn variables, builds a CI pipeline,
+declares some functions, etc.
+
 ## Author
 
 - Matt Runyon
