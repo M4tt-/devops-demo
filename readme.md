@@ -85,7 +85,7 @@ and the YAML format is cleaner than Jenkins Declarative Pipelines. No dig on Jen
 There is a ``Jenkinsfile`` at the base of this repository that is 'standalone' - it doesn't actually operate on the other code
 herein, it is merely a demo file that showcases various things you can do:
 
-- Trigger on some web hook (e.g., pull request)
+- Trigger on web hook (e.g., pull request) w/ Generic Web Hook plugin
 - Checkout code
 - Test code
 - Lint code
