@@ -1,6 +1,6 @@
 ## devops-demo
 
-A repo for playing with the basics of DevOps and cloud providers (AWS, GCP, Azure). There are CI/CD pipelines, cloud provisioning (IAAC), and other random fun stuff. Some of this code was written while taking a DevOps course offered by in28min (link below under Author) and further modified to be more general.
+A repo for playing with the basics of DevOps and cloud providers (AWS, GCP, Azure). There are CI/CD pipelines, cloud provisioning (IaC), and other random fun stuff. Some of this code was written while taking a DevOps course offered by in28min (link below under Author) and further modified to be more general.
 
 Tech stack:
 
@@ -13,7 +13,7 @@ Tech stack:
 
 ## Content
 
-### Terraform (IAAC)
+### Terraform (IaC)
 
 `terraform\main.tf` declares an AWS infrastructure with the following resources:
 
